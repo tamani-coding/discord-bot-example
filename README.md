@@ -2,7 +2,7 @@
 
 This discord bot is based on the [discord tutorial](https://discord.com/developers/docs/getting-started#overview).
 
-This discord bot implements a /aww slash command where a random cute animal picture is posted inside a discord channel and users can react to it.
+This discord bot implements an `/aww` slash command where a random cute animal picture is posted inside a discord channel and users can react to it.
 
 Check the app.js file for slash-command handling.
 
