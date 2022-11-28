@@ -1,5 +1,8 @@
-import { getRPSChoices } from './game.js';
-import { capitalize, DiscordRequest } from './utils.js';
+import { DiscordRequest } from './utils.js';
+import {
+  MessageComponentTypes,
+  ButtonStyleTypes,
+} from 'discord-interactions';
 
 export async function HasGuildCommands(appId, guildId, commands) {
   if (guildId === '' || appId === '') return;
@@ -43,47 +46,27 @@ export async function InstallGuildCommand(appId, guildId, command) {
   }
 }
 
-// Get the game choices from game.js
-function createCommandChoices() {
-  const choices = getRPSChoices();
-  const commandChoices = [];
-
-  for (let choice of choices) {
-    commandChoices.push({
-      name: capitalize(choice),
-      value: choice.toLowerCase(),
-    });
-  }
-
-  return commandChoices;
-}
-
 // Aww command
 export const AWW_COMMAND = {
   name: 'aww',
-  description: 'A random cute animal picture, aww ....',
+  description: 'Show a random cute animal picture.',
   type: 1,
 }
 
-// Simple test command
-export const TEST_COMMAND = {
-  name: 'test',
-  description: 'Basic guild command',
-  type: 1,
-};
+export const aww_reactions = [
+  { id: 'aww_reaction_surprise', label: '😯' },
+  { id: 'aww_reaction_laugh', label: '😂' },
+  { id: 'aww_reaction_dog', label: '🐕' },
+]
 
-// Command containing options
-export const CHALLENGE_COMMAND = {
-  name: 'challenge',
-  description: 'Challenge to a match of rock paper scissors',
-  options: [
-    {
-      type: 3,
-      name: 'object',
-      description: 'Pick your object',
-      required: true,
-      choices: createCommandChoices(),
-    },
-  ],
-  type: 1,
-};
+export const aww_reaction_components = [];
+aww_reactions.forEach(reaction => {
+
+  aww_reaction_components.push({
+    type: MessageComponentTypes.BUTTON,
+    custom_id: reaction.id,
+    label: reaction.label,
+    style: ButtonStyleTypes.PRIMARY,
+  });
+
+});
